@@ -13,16 +13,12 @@
       async function getThumbnail() {
         const response = await fetch(url);
         const data = await response.json();
-        //console.log(data._embedded.artworks[0]._links.thumbnail);
         var art = data._embedded.artworks;
         art.forEach(function(o) {
           var img = document.createElement("image");
           img.src = o._links.thumbnail; //set the value equal to the href
           document.querySelector("body").appendChild(img);
-          //console.log(o._links.thumbnail);
-          // document
-          //   .querySelector("body")
-          //   .append('<image src="' + o._links.thumbnail + '">');
+
           let elem = document.createElement("img");
           elem.src = o._links.thumbnail.href;
           document.getElementById("placehere").appendChild(elem);
