@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <script>
+      const url =
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/207241/artsy-example.json";
+      async function getThumbnail() {
+        const response = await fetch(url);
+        const data = await response.json();
+        //console.log(data._embedded.artworks[0]._links.thumbnail);
+        var art = data._embedded.artworks;
+        art.forEach(function(o) {
+          var img = document.createElement("image");
+          img.src = o._links.thumbnail; //set the value equal to the href
+          document.querySelector("body").appendChild(img);
+          //console.log(o._links.thumbnail);
+          // document
+          //   .querySelector("body")
+          //   .append('<image src="' + o._links.thumbnail + '">');
+          let elem = document.createElement("img");
+          elem.src = o._links.thumbnail.href;
+          document.getElementById("placehere").appendChild(elem);
+        });
+      }
+
+      getThumbnail();
+    </script>
+    <div id="placehere"></div>
+  </body>
+</html>
